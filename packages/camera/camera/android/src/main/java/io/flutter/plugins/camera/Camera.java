@@ -1,6 +1,6 @@
 // Copyright 2013 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file. Federico
+// found in the LICENSE file.
 
 package io.flutter.plugins.camera;
 
@@ -491,8 +491,9 @@ public class Camera {
             case focusing:
               if (afState == null) {
                 return;
-              } else if (afState == CaptureResult.CONTROL_AF_STATE_FOCUSED_LOCKED
-                  || afState == CaptureResult.CONTROL_AF_STATE_NOT_FOCUSED_LOCKED) {
+              }
+              else if (afState == CaptureResult.CONTROL_AF_STATE_FOCUSED_LOCKED
+                  || afState == CaptureResult.CONTROL_AF_STATE_NOT_FOCUSED_LOCKED || afState == CaptureResult.CONTROL_AF_MODE_AUTO) {
                 // Some devices might return null here, in which case we will also continue.
                 if (aeState == null || aeState == CaptureResult.CONTROL_AE_STATE_CONVERGED) {
                   runPictureCapture();
@@ -575,6 +576,7 @@ public class Camera {
         default:
           captureBuilder.set(
               CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_ALWAYS_FLASH);
+
           break;
       }
       cameraCaptureSession.stopRepeating();
